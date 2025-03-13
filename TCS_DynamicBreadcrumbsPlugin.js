@@ -45,6 +45,11 @@ function generateBreadcrumbs() {
             breadcrumbWrapper.appendChild(icon);
         }
     });
+
+    let itemGap = breadcrumbWrapper.getAttribute('data-item-gap');
+    if (itemGap) {
+        breadcrumbWrapper.style.gap = itemGap;
+    }
 }
 
 document.addEventListener('DOMContentLoaded', generateBreadcrumbs);
