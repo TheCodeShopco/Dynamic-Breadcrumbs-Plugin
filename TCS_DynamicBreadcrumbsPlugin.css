@@ -1,0 +1,15 @@
+#breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .breadcrumb-icon {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-position: 50%;
+    background-repeat: no-repeat;
+  }
