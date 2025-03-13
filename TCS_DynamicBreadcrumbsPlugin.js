@@ -46,7 +46,7 @@ function generateBreadcrumbs() {
         }
     });
 
-    let itemGap = breadcrumbWrapper.getAttribute('data-item-gap');
+    let itemGap = breadcrumbWrapper.getAttribute('data-item-spacing');
     if (itemGap) {
         breadcrumbWrapper.style.gap = itemGap;
     }
