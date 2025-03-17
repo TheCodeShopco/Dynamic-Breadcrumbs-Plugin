@@ -58,4 +58,23 @@ function generateBreadcrumbs() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', generateBreadcrumbs);
+function adjustBreadcrumbText() {
+    const breadcrumbWrapper = document.getElementById('breadcrumbs');
+    const termsAttribute = breadcrumbWrapper.getAttribute('data-uppercase-terms');
+    if (!termsAttribute) return;
+
+    const specialTerms = termsAttribute.split(',').map(term => term.trim());
+    const breadcrumbs = document.querySelectorAll('#breadcrumbs p, #breadcrumbs a');
+
+    breadcrumbs.forEach(breadcrumb => {
+        specialTerms.forEach(term => {
+            const regex = new RegExp(term, 'gi');
+            breadcrumb.textContent = breadcrumb.textContent.replace(regex, match => match.toUpperCase());
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    generateBreadcrumbs();
+    adjustBreadcrumbText();
+});
