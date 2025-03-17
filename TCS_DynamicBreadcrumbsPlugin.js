@@ -28,12 +28,18 @@ function generateBreadcrumbs() {
     let iconColor = breadcrumbWrapper.getAttribute('data-icon-color');
 
     breadcrumbs.forEach(function (breadcrumb, index) {
-        var link = document.createElement('a');
-        link.href = breadcrumb.url;
-        link.textContent = breadcrumb.title;
-        breadcrumbWrapper.appendChild(link);
-
-        if (index < breadcrumbs.length - 1) {
+        if (index === breadcrumbs.length - 1) {
+            // Render the last (or only) breadcrumb as a 'p' element
+            var text = document.createElement('p');
+            text.textContent = breadcrumb.title;
+            breadcrumbWrapper.appendChild(text);
+        } else {
+            // Render other breadcrumbs as links
+            var link = document.createElement('a');
+            link.href = breadcrumb.url;
+            link.textContent = breadcrumb.title;
+            breadcrumbWrapper.appendChild(link);
+    
             var icon = document.createElement('span');
             icon.classList.add('breadcrumb-icon');
             if (breadcrumbWrapper.getAttribute('data-custom-icon') !== 'true') {
