@@ -4,6 +4,14 @@
     align-items: center;
     gap: 4px;
   }
+
+  #breadcrumbs p {
+    margin: 0 !important;
+  }
+
+  #breadcrumbs a {
+    margin: 0 !important;
+  }
   
   .breadcrumb-icon {
     width: 16px;
