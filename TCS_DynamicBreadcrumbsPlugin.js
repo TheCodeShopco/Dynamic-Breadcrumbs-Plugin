@@ -2,13 +2,12 @@ function generateBreadcrumbs() {
     var breadcrumbs = [];
     var pathArray = window.location.pathname.split('/');
     var breadcrumbWrapper = document.getElementById('breadcrumbs');
-    var capitalisation = breadcrumbWrapper.getAttribute('data-breadcrumb-capitalisation');
 
     pathArray.forEach(function (path, index) {
         if (path) {
             var formattedPath = path.replace(/-/g, ' ');
             var title;
-            if (capitalisation === 'title') {
+            if (breadcrumbOptions.capitalisationStyle === 'title') {
                 title = formattedPath.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
             } else {
                 title = formattedPath.charAt(0).toUpperCase() + formattedPath.slice(1);
@@ -21,11 +20,9 @@ function generateBreadcrumbs() {
         }
     });
 
-    if (breadcrumbWrapper.getAttribute('data-display-home') === 'true') {
+    if (breadcrumbOptions.displayHome === 'true') {
         breadcrumbs.unshift({ title: 'Home', url: '/' });
     }
-
-    let iconColor = breadcrumbWrapper.getAttribute('data-icon-color');
 
     breadcrumbs.forEach(function (breadcrumb, index) {
         if (index === breadcrumbs.length - 1) {
@@ -42,28 +39,26 @@ function generateBreadcrumbs() {
     
             var icon = document.createElement('span');
             icon.classList.add('breadcrumb-icon');
-            if (breadcrumbWrapper.getAttribute('data-custom-icon') !== 'true') {
+            if (breadcrumbOptions.customIcon !== 'true') {
                 icon.innerHTML = ' > ';
             }
-            if (iconColor) {
-                icon.style.color = iconColor;
+            if (breadcrumbOptions.iconColor) {
+                icon.style.color = breadcrumbOptions.iconColor;
             }
             breadcrumbWrapper.appendChild(icon);
         }
     });
 
-    let itemGap = breadcrumbWrapper.getAttribute('data-item-spacing');
-    if (itemGap) {
-        breadcrumbWrapper.style.gap = itemGap;
+    if (breadcrumbOptions.itemSpacing) {
+        breadcrumbWrapper.style.gap = breadcrumbOptions.itemSpacing;
     }
 }
 
 function adjustBreadcrumbText() {
-    const breadcrumbWrapper = document.getElementById('breadcrumbs');
-    const termsAttribute = breadcrumbWrapper.getAttribute('data-uppercase-terms');
-    if (!termsAttribute) return;
+    const termsList = breadcrumbOptions.forcedUppercaseTerms;
+    if (!termsList) return;
 
-    const specialTerms = termsAttribute.split(',').map(term => term.trim());
+    const specialTerms = termsList.split(',').map(term => term.trim());
     const breadcrumbs = document.querySelectorAll('#breadcrumbs p, #breadcrumbs a');
 
     breadcrumbs.forEach(breadcrumb => {
